@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DataLayer.Page>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<p>
+
+    <a href="@Url.Action("Create","Pages")" class="btn btn-success">افزودن خبر جدید</a>
+    <a class="btn btn-success" href="/">صفحه اصلی سایت</a>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageGroup.GroupTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CreatePage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowSlider)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+                <img src="~/images/@item.ImageName" class="thumbnail img1" style="max-width:120px" />
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageGroup.GroupTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+
+        <td>
+            @item.CreatePage.ToShamsi()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Visit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowSlider)
+        </td>
+        <td>
+            <a class="btn btn-sm btn-warning" href="@Url.Action("Edit","Pages",new {id=item.PageId })" title="ویرایش"><i class="glyphicon glyphicon-edit"></i></a>
+            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Pages",new {id=item.PageId })" title="حذف"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+}
+
+</table>
